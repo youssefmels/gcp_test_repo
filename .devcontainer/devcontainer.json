@@ -1,0 +1,22 @@
+{
+  "name": "Fake Codespace",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspace",
+  "remoteUser": "codespace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-python.python",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "settings": {
+    "editor.fontSize": 14,
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "postCreateCommand": "./scripts/fake-codespace-setup.sh"
+}
