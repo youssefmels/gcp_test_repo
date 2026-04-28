@@ -55,3 +55,27 @@ def fetch_user_from_token(token: str) -> Optional[User]:
         return None
 
     return User(username=username, email=f"{username}@example.com")
+
+# Token store for refresh tokens - to be replaced with persistent storage
+_refresh_tokens: Dict[str, str] = {}
+
+def refresh_token(old_token: str) -> Optional[str]:
+    """Refresh an existing token and return a new one.
+    
+    TODO: Implement token rotation - invalidate old token after refresh
+    TODO: Persist refresh tokens to storage instead of in-memory dict
+    """
+    if not validate_token(old_token):
+        return None
+    
+    parts = old_token.split("_")
+    if len(parts) < 3:
+        return None
+    
+    username = parts[1]
+    if username not in _USER_DB:
+        return None
+
+    # TODO: invalidate old_token here before returning new one
+    new_token = generate_token(username)
+    return new_token
